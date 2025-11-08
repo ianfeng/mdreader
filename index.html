@@ -4,11 +4,6 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>本地 Markdown 查看器</title>
-
-  <!-- Highlight.js 样式（浅色主题） -->
-  <!--link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css"-->
-
   <style>
 
     html {
@@ -43,7 +38,6 @@
       font-size: 1.6rem;
     }
 
-    /* 代码块样式 */
     pre code {
       font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
       background-color: #f8f8f8e0; /* 浅色背景 */
@@ -54,7 +48,6 @@
       line-height: 1.5;
     }
 
-    /* 行号表格样式 */
     .hljs-ln {
       border-collapse: collapse;
       width: 100%;
@@ -73,7 +66,6 @@
     .hljs-ln-code {
       padding-left: 1rem;
     }
-    /* fy定制 Highlight.js 样式（浅色主题）*/
     .hljs {
       color:#24292e;
       background:#eee
@@ -163,70 +155,30 @@
     </div>
   </div>
 
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']]
+      },
+      svg: {
+        fontCache: 'global'
+      }
+    };
+  </script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js"></script>
 
-  <!-- 引入 marked 和 highlight.js -->
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
-  <!-- 只加载常用语言（可按需增减） -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/javascript.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/bash.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/json.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/html.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/css.min.js"></script>
-  <!-- 如需全部语言，可替换为 all.min.js（但注意 URL 不能有空格！） -->
 
   <script>
-    // 配置 marked 使用 highlight.js
-    marked.setOptions({
-      highlight: function(code, lang) {
-        const language = hljs.getLanguage(lang) ? lang : 'plaintext';
-        return hljs.highlight(code, { language }).value;
-      },
-      langPrefix: 'hljs language-'
-    });
-
-    // 行号生成函数
-    function addLineNumbers(block) {
-      if (block.hasAttribute('data-ln-processed')) return;
-      block.setAttribute('data-ln-processed', 'true');
-
-      const lines = block.innerHTML.split(/\n/).filter(line => line.trim() !== '');
-      let tableHTML = '<table class="hljs-ln"><tbody>';
-      lines.forEach((line, i) => {
-        tableHTML += `
-          <tr>
-            <td class="hljs-ln-numbers"><div class="hljs-ln-line">${i + 1}</div></td>
-            <td class="hljs-ln-code"><div class="hljs-ln-line">${line}</div></td>
-          </tr>`;
-      });
-      tableHTML += '</tbody></table>';
-      block.innerHTML = tableHTML;
-    }
-
-    // 文件选择事件
-    document.getElementById('fileInput').addEventListener('change', function(e) {
-      const file = e.target.files[0];
-      if (!file) return;
-
-      const reader = new FileReader();
-      reader.onload = function(event) {
-        const mdText = event.target.result;
-        const html = marked.parse(mdText);
-        document.getElementById('content').innerHTML = html;
-
-        // 对所有代码块进行高亮 + 行号
-        document.querySelectorAll('pre code').forEach((block) => {
-          // 先高亮
-          if (!block.classList.contains('hljs')) {
-            hljs.highlightElement(block);
-          }
-          // 再加行号
-          addLineNumbers(block);
-        });
-      };
-      reader.readAsText(file, 'UTF-8');
-    });
+    const _0xb8b956=_0x4c71;(function(_0x111e48,_0x5eb81c){const _0xe29066=_0x4c71,_0x5014cb=_0x111e48();while(!![]){try{const _0x13d874=parseInt(_0xe29066(0x184))/0x1+parseInt(_0xe29066(0x171))/0x2*(parseInt(_0xe29066(0x16c))/0x3)+-parseInt(_0xe29066(0x160))/0x4*(-parseInt(_0xe29066(0x17e))/0x5)+-parseInt(_0xe29066(0x181))/0x6+-parseInt(_0xe29066(0x183))/0x7+-parseInt(_0xe29066(0x17b))/0x8*(parseInt(_0xe29066(0x179))/0x9)+parseInt(_0xe29066(0x17f))/0xa;if(_0x13d874===_0x5eb81c)break;else _0x5014cb['push'](_0x5014cb['shift']());}catch(_0x539599){_0x5014cb['push'](_0x5014cb['shift']());}}}(_0x5844,0x474c9));function _0x4c71(_0x1b4c7c,_0x39f463){const _0x584454=_0x5844();return _0x4c71=function(_0x4c71b8,_0x15dc15){_0x4c71b8=_0x4c71b8-0x15c;let _0xb4ae25=_0x584454[_0x4c71b8];return _0xb4ae25;},_0x4c71(_0x1b4c7c,_0x39f463);}function protectMath(_0x1ba9bb){const _0x538218=_0x4c71;let _0x301aae=[],_0x4c67c7=_0x1ba9bb;return _0x4c67c7=_0x4c67c7[_0x538218(0x174)](/\$\$(.*?)\$\$/gs,(_0x5d4b71,_0x28c56f)=>{const _0x3d9bb0=_0x538218;return _0x301aae['push'](_0x28c56f),'<!--MATH_BLOCK_'+(_0x301aae['length']-0x1)+_0x3d9bb0(0x173);}),_0x4c67c7=_0x4c67c7[_0x538218(0x174)](/\$(.*?)\$/g,(_0x84924e,_0x3934e9)=>{const _0x33de35=_0x538218;if(_0x3934e9[_0x33de35(0x164)]()===''||_0x3934e9[_0x33de35(0x180)]('\x0a'))return _0x84924e;return _0x301aae[_0x33de35(0x16a)](_0x3934e9),_0x33de35(0x170)+(_0x301aae[_0x33de35(0x163)]-0x1)+'-->';}),{'protectedMd':_0x4c67c7,'mathBlocks':_0x301aae};}function _0x5844(){const _0xaaba53=['parse','highlightElement','200WRBeiF','1582830Irlauj','includes','490914EVihEK','addEventListener','1405383TwpHLt','506232VKqHtF','change','undefined','hljs','contains','content','forEach','true','filter','hljs\x20language-','readAsText','getElementById','getLanguage','23216eXrmUe','split','hasAttribute','length','trim','typesetPromise','fileInput','plaintext','value','data-ln-processed','push','</div></td>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</tr>','22059TVWENu','setOptions','classList','innerHTML','<!--MATH_INLINE_','2KtduGc','target','-->','replace','\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<tr>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<td\x20class=\x22hljs-ln-numbers\x22><div\x20class=\x22hljs-ln-line\x22>','</tbody></table>','onload','highlight','63ZfSvDn','</div></td>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<td\x20class=\x22hljs-ln-code\x22><div\x20class=\x22hljs-ln-line\x22>','376456cKLRdl'];_0x5844=function(){return _0xaaba53;};return _0x5844();}function restoreMath(_0x5ae69e,_0x145cfd){const _0x168b13=_0x4c71;return _0x5ae69e=_0x5ae69e[_0x168b13(0x174)](/<!--MATH_BLOCK_(\d+)-->/g,(_0x2b71c3,_0x57ae24)=>{return'$$'+_0x145cfd[_0x57ae24]+'$$';}),_0x5ae69e=_0x5ae69e[_0x168b13(0x174)](/<!--MATH_INLINE_(\d+)-->/g,(_0x4c7f62,_0x34f660)=>{return'$'+_0x145cfd[_0x34f660]+'$';}),_0x5ae69e;}marked[_0xb8b956(0x16d)]({'highlight':function(_0x5a68e8,_0x4b25ee){const _0x25b0a4=_0xb8b956,_0x3a6287=hljs[_0x25b0a4(0x15f)](_0x4b25ee)?_0x4b25ee:_0x25b0a4(0x167);return hljs[_0x25b0a4(0x178)](_0x5a68e8,{'language':_0x3a6287})[_0x25b0a4(0x168)];},'langPrefix':_0xb8b956(0x15c),'smartypants':![],'gfm':!![],'breaks':!![]});function addLineNumbers(_0x14b1dc){const _0x1ab3d0=_0xb8b956;if(_0x14b1dc[_0x1ab3d0(0x162)](_0x1ab3d0(0x169)))return;_0x14b1dc['setAttribute'](_0x1ab3d0(0x169),_0x1ab3d0(0x18b));const _0x5258a8=_0x14b1dc[_0x1ab3d0(0x16f)][_0x1ab3d0(0x161)](/\n/)[_0x1ab3d0(0x18c)](_0x3e5cb6=>_0x3e5cb6[_0x1ab3d0(0x164)]()!=='');let _0x368536='<table\x20class=\x22hljs-ln\x22><tbody>';_0x5258a8['forEach']((_0x2067c8,_0x23dfd2)=>{const _0x335c3f=_0x1ab3d0;_0x368536+=_0x335c3f(0x175)+(_0x23dfd2+0x1)+_0x335c3f(0x17a)+_0x2067c8+_0x335c3f(0x16b);}),_0x368536+=_0x1ab3d0(0x176),_0x14b1dc[_0x1ab3d0(0x16f)]=_0x368536;}document[_0xb8b956(0x15e)](_0xb8b956(0x166))[_0xb8b956(0x182)](_0xb8b956(0x185),function(_0x56b49c){const _0x5e0ad4=_0xb8b956,_0x4f5e6c=_0x56b49c[_0x5e0ad4(0x172)]['files'][0x0];if(!_0x4f5e6c)return;const _0x527f4a=new FileReader();_0x527f4a[_0x5e0ad4(0x177)]=function(_0x5c806d){const _0x5af456=_0x5e0ad4,_0x2da337=_0x5c806d[_0x5af456(0x172)]['result'],{protectedMd:_0x4ddd23,mathBlocks:_0x3bfada}=protectMath(_0x2da337),_0x282ebf=marked[_0x5af456(0x17c)](_0x4ddd23),_0x390b52=restoreMath(_0x282ebf,_0x3bfada);document['getElementById'](_0x5af456(0x189))[_0x5af456(0x16f)]=_0x390b52,document['querySelectorAll']('pre\x20code')[_0x5af456(0x18a)](_0x364f1e=>{const _0xb4e36d=_0x5af456;!_0x364f1e[_0xb4e36d(0x16e)][_0xb4e36d(0x188)](_0xb4e36d(0x187))&&hljs[_0xb4e36d(0x17d)](_0x364f1e),addLineNumbers(_0x364f1e),typeof MathJax!==_0xb4e36d(0x186)&&MathJax[_0xb4e36d(0x165)]([document[_0xb4e36d(0x15e)]('content')]);});},_0x527f4a[_0x5e0ad4(0x15d)](_0x4f5e6c,'UTF-8');});
   </script>
 </body>
 </html>
